@@ -170,7 +170,13 @@ async function resetearLosTiempos() {
 		tiempoActual = 0;
 		actualMasTiempo = 0;
 		intermedioTiempo = null;
-		mostrarTiempo.textContent = "--:--";
+		mostrarTiempo.textContent = tiempo + " minutos";
+		circuloIndicador.style.display = "none";
+		mostrarTiempo.style.transform = "translate(0%, 0%)"
+		mostrarTiempo.style.position = "";
+		cajaMasMenos.style.display = "";
+		checkAlertaSonora.style.display = "";
+		labelAlertaSonora.style.display = "";
 		continuar.style.display = "none";
 		empezar.style.display = "";
 		reiniciar.style.display = "none";
