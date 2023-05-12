@@ -13,6 +13,7 @@ let checkAlerta = document.querySelector("#alerta");
 const labelAlerta = document.querySelector(".alerta");
 const cajaMasMenos = document.querySelector(".caja-masmenos");
 const alertaUno = new Audio("audios/alerta01.mp3");
+const alertaDos = new Audio("audios/alerta02.mp3");
 let ventanaModal = document.querySelector(".ventana-modal");
 const btnModalCerrar = document.querySelector(".boton-modal-cerrar");
 const btnModalSi = document.querySelector(".boton-modal-si");
@@ -39,6 +40,9 @@ let tiempoEnPausa;
 let minutos;
 let segundos;
 
+//modal
+let texto = "";
+
 //marcadores
 let marcador;
 let marcadorLleno;
@@ -58,6 +62,14 @@ ventanaModal.style.display = "none";
 //Crea y oculta los marcadores
 crearMarcadores();
 circuloIndicador.style.display = "none";
+
+//funciones
+
+function suenaAlerta(audio) {
+	if (checkAlerta.checked) {
+		audio.play();
+	}
+}
 
 function mostrarModal(texto) {
 	ventanaModal.style.display = "";
@@ -146,7 +158,6 @@ function continuarTiempo() {
 	continuar.style.display = "none";
 	pausa.style.display = "";
 }
-let texto = "";
 
 async function resetearLosTiempos() {
 	pausarTiempo();
@@ -230,7 +241,7 @@ function correTiempo(momentoActual) {
 	}
 	if (momentoActual === tiempo) {
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
-			alertaUno.play();
+			suenaAlerta(alertaDos);
 			mostrarTiempo.textContent = "--:--";
 			pomodorosCompletados += 1;
 			pausarTiempo();
@@ -240,7 +251,7 @@ function correTiempo(momentoActual) {
 			console.log("Cantidad de decansos: " + descansos);
 			return;
 		} else if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
-			alertaUno.play();
+			suenaAlerta(alertaDos);
 			pomodorosCompletados += 1;
 			console.log("Pomodoros completados = " + pomodorosCompletados);
 			pausarTiempo();
@@ -253,7 +264,6 @@ function correTiempo(momentoActual) {
 
 	if (momentoActual === tiempoDescansoCorto) {
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
-			alertaUno.play();
 			descansos -= 1;
 			pausarTiempo();
 			tiemposEnCero();
@@ -265,7 +275,7 @@ function correTiempo(momentoActual) {
 
 	if (momentoActual === tiempoDescansoLargo) {
 		if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
-			alertaUno.play();
+			suenaAlerta(alertaUno);
 			pausarTiempo();
 			tiemposEnCero();
 			descansos = 3;
