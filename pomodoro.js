@@ -9,8 +9,9 @@ const reiniciar = document.querySelector(".reiniciar");
 const circuloIndicador = document.querySelector(".circulo-indicador");
 let mostrarDescansoCorto = document.querySelector(".tiempo-descanso-corto");
 let mostrarDescansoLargo = document.querySelector(".tiempo-descanso-largo");
-let checkAlerta = document.querySelector("#alerta");
-const labelAlerta = document.querySelector(".alerta");
+let checkAlertaSonora = document.querySelector("#alerta-sonora");
+const labelAlertaSonora = document.querySelector(".alerta-sonora");
+
 const cajaMasMenos = document.querySelector(".caja-masmenos");
 const alertaUno = new Audio("audios/alerta01.mp3");
 const alertaDos = new Audio("audios/alerta02.mp3");
@@ -52,8 +53,8 @@ let porcentajeActual;
 
 //Mostrar/Ocultar en el HTML
 mostrarTiempo.textContent = tiempo + " minutos";
-mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
-mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
+// mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
+// mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
 continuar.style.display = "none";
 pausa.style.display = "none";
 reiniciar.style.display = "none";
@@ -66,7 +67,7 @@ circuloIndicador.style.display = "none";
 //funciones
 
 function suenaAlerta(audio) {
-	if (checkAlerta.checked) {
+	if (checkAlertaSonora.checked) {
 		audio.play();
 	}
 }
@@ -123,8 +124,8 @@ function sumarTiempo() {
 	tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 	empezar.value = "Empezar";
 	mostrarTiempo.textContent = tiempo + " minutos";
-	mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
-	mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
+	// mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
+	// mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
 	tiempoActual = new Date().getTime();
 	return tiempo;
 }
@@ -138,8 +139,8 @@ function restarTiempo() {
 	tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 	empezar.value = "Empezar";
 	mostrarTiempo.textContent = tiempo + " minutos";
-	mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
-	mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
+	// mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
+	// mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
 	tiempoActual = new Date().getTime();
 	return tiempo;
 }
@@ -216,11 +217,11 @@ function moverTiempo() {
 
 function ocultarTextosBotones() {
 	cajaMasMenos.style.display = "none";
-	mostrarDescansoCorto.style.display = "none";
-	mostrarDescansoLargo.style.display = "none";
+	// mostrarDescansoCorto.style.display = "none";
+	// mostrarDescansoLargo.style.display = "none";
 	continuar.style.display = "none";
-	checkAlerta.style.display = "none";
-	labelAlerta.style.display = "none";
+	checkAlertaSonora.style.display = "none";
+	labelAlertaSonora.style.display = "none";
 }
 
 function correTiempo(momentoActual) {
