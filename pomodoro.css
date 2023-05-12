@@ -1,10 +1,23 @@
 body {
 	font-family: "Ubuntu", sans-serif;
-	background-color: #655917;
+	background-color: #EADEDA;
+	color: #2E294E;
+	height: 100%;
+}
+
+
+header {
+    min-height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 main {
-	height: 100vh;
+    min-height: 84vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .ventana-modal {
@@ -20,7 +33,8 @@ main {
 
 .contenido-modal {
 	position: relative;
-	background-color: #fefefe;
+	background-color: #EADEDA;
+	color: #2E294E;
 	margin: 20% auto;
 	padding: 30px 20px 20px;
 	border: 1px solid #888;
@@ -52,13 +66,14 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: #EADEDA;
 }
 
 .ingreso-tiempo {
 	padding-top: 5px;
 	border: solid 4px;
 	border-color: #00000020;
-	background-color: #fcbf49;
+	background-color: #2E294E;
 	border-radius: 9px;
 	min-width: 350px;
 	min-height: 350px;
@@ -83,10 +98,11 @@ main {
 	position: absolute;
 	transform: translate(-50%, -50%) rotate(0deg);
 	border-radius: 50%;
+	background-color: #7f71da;
 }
 
 .activo {
-	background-color: red;
+	background-color: #d44d8c;
 }
 
 .mostrar-tiempo {
@@ -115,7 +131,7 @@ main {
 
 .caja-masmenos .mas,
 .caja-masmenos .menos {
-	background-color: #f77f00;
+	background-color: #5d51aa;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -127,7 +143,7 @@ main {
 .caja-masmenos .mas:hover,
 .caja-masmenos .menos:hover {
 	filter: brightness(0.9);
-	background-color: #fcbf49;
+	background-color: #7f71da;
 }
 
 .caja-demasbotones {
@@ -141,7 +157,8 @@ main {
 .caja-demasbotones .pausa,
 .caja-demasbotones .reiniciar,
 .caja-demasbotones .continuar {
-	background-color: #f77f00;
+	background-color: #5d51aa;
+	color: #c0b8f3;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -155,5 +172,39 @@ main {
 .caja-demasbotones .reiniciar:hover,
 .caja-demasbotones .continuar:hover {
 	filter: brightness(0.9);
-	background-color: #fcbf49;
+	background-color: #7f71da;
+}
+
+footer {
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+footer a:visited {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+.caja-links {
+    width: 100px;
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+footer img:hover {
+    filter: brightness(8);
+}
+
+.caja-links img {
+    width: 25px;
+    height: 25px;
 }

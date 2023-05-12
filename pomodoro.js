@@ -20,7 +20,7 @@ const btnModalNo = document.querySelector(".boton-modal-no");
 let textoDentroModal = document.querySelector(".texto-dentro-modal");
 
 //tiempos
-let tiempo = 25;
+let tiempo = 1;
 let tiempoDescansoCorto = tiempo / 5;
 let tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 
@@ -79,7 +79,6 @@ function crearMarcadores() {
 		marcador.classList.add("marcador");
 		marcador.setAttribute("id", `marcador-lleno-${Math.floor((i + 1) * 4.1666666667)}`);
 		marcador.style.transform = `translate(1750%, 1750%) rotate(${angulo}deg) translate(${radio}px)`;
-		marcador.style.backgroundColor = "lightblue";
 		circuloIndicador.appendChild(marcador);
 	}
 }
@@ -87,7 +86,6 @@ function crearMarcadores() {
 function limpiarMarcadores() {
 	marcador = document.querySelectorAll(".marcador");
 	marcador.forEach((marcador) => {
-		marcador.style.backgroundColor = "lightblue";
 		marcador.classList.remove("activo");
 	});
 }
@@ -100,7 +98,6 @@ function llenarMarcadores(tiempo) {
 	marcadorLleno = document.querySelector(`#marcador-lleno-${porcentajeActual}`);
 
 	if (marcadorLleno) {
-		marcadorLleno.style.backgroundColor = "red";
 		marcadorLleno.classList.add("activo");
 	}
 }
