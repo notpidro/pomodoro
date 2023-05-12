@@ -3,7 +3,7 @@ let mostrarTiempo = document.querySelector(".mostrar-tiempo");
 const btnSumarTiempo = document.querySelector(".mas");
 const btnRestarTiempo = document.querySelector(".menos");
 const continuar = document.querySelector(".continuar");
-const empezar = document.querySelector(".empezar");
+let empezar = document.querySelector(".empezar");
 const pausa = document.querySelector(".pausa");
 const reiniciar = document.querySelector(".reiniciar");
 const circuloIndicador = document.querySelector(".circulo-indicador");
@@ -172,7 +172,7 @@ async function resetearLosTiempos() {
 		intermedioTiempo = null;
 		mostrarTiempo.textContent = tiempo + " minutos";
 		circuloIndicador.style.display = "none";
-		mostrarTiempo.style.transform = "translate(0%, 0%)"
+		mostrarTiempo.style.transform = "translate(0%, 0%)";
 		mostrarTiempo.style.position = "";
 		cajaMasMenos.style.display = "";
 		checkAlertaSonora.style.display = "";
@@ -254,13 +254,13 @@ function correTiempo(momentoActual) {
 			pausarTiempo();
 			tiemposEnCero();
 			descansoCorto();
-			console.log("Pomodoros completados = " + pomodorosCompletados);
-			console.log("Cantidad de decansos: " + descansos);
+			// console.log("Pomodoros completados = " + pomodorosCompletados);
+			// console.log("Cantidad de decansos: " + descansos);
 			return;
 		} else if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
 			suenaAlerta(alertaDos);
 			pomodorosCompletados += 1;
-			console.log("Pomodoros completados = " + pomodorosCompletados);
+			// console.log("Pomodoros completados = " + pomodorosCompletados);
 			pausarTiempo();
 			tiemposEnCero();
 			mostrarTiempo.textContent = "--:--";
@@ -287,10 +287,13 @@ function correTiempo(momentoActual) {
 			tiemposEnCero();
 			descansos = 3;
 			ciclosCompletados += 1;
-			console.log("Pomodoros completados = " + pomodorosCompletados);
-			console.log("Ciclos completados: " + ciclosCompletados);
-			mostrarTiempo.textContent = "Pomo completado";
-			console.log("Cantidad de decansos: " + descansos);
+			// console.log("Pomodoros completados = " + pomodorosCompletados);
+			// console.log("Ciclos completados: " + ciclosCompletados);
+			mostrarTiempo.textContent = "COMPLETADO";
+			reiniciar.style.display = "none";
+			continuar.style.display = "none";
+			empezar.style.display = "";
+			// console.log("Cantidad de decansos: " + descansos);
 			return;
 		}
 	}
@@ -304,7 +307,7 @@ function empezarPomodoro() {
 	limpiarMarcadores();
 	moverTiempo();
 	ocultarTextosBotones();
-	console.log("Empieza tiempo REGRESIVA");
+	// console.log("Empieza tiempo REGRESIVA");
 	empezar.style.display = "none";
 	reiniciar.style.display = "";
 	pausa.style.display = "";
@@ -315,7 +318,7 @@ function empezarPomodoro() {
 
 function descansoCorto() {
 	momentoActual = tiempoDescansoCorto;
-	console.log("Empieza descanso CORTO");
+	// console.log("Empieza descanso CORTO");
 	limpiarMarcadores();
 	ocultarTextosBotones();
 	empezar.style.display = "none";
@@ -332,7 +335,7 @@ function descansoLargo() {
 	momentoActual = tiempoDescansoLargo;
 	limpiarMarcadores();
 	ocultarTextosBotones();
-	console.log("Empieza descanso LARGO");
+	// console.log("Empieza descanso LARGO");
 	empezar.style.display = "none";
 	document.querySelector(".caja-masmenos").style.display = "none";
 	pausa.style.display = "";
