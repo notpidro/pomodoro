@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="pomodoro.css">
+    <title>Pomodoro - by Walter F. Campillay P.</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <div class="ventana-modal">
+            <div class="contenido-modal">
+                <span class="boton-modal-cerrar">&times;</span>
+                <p class="texto-dentro-modal">Texto en la ventana modal</p>
+                <button class="boton-modal-si">Si</button>
+                <button class="boton-modal-no">No</button>
+            </div>
+        </div>
+        <section class="pomodoro">
+            <div class="ingreso-tiempo">
+                <div class="circulo-indicador"></div>
+                <div class="caja-tiempo-masmenos">
+                    <p class="mostrar-tiempo"></p>
+                    <div class="caja-masmenos">
+                        <input class="mas" type="button" value="+">
+                        <input class="menos" type="button" value="-">
+                    </div>
+                </div>
+                <div class="configuracion-descansos">
+                    <p class="tiempo-descanso-corto">Descanso corto</p>
+                    <p class="tiempo-descanso-largo">Descanso largo</p>
+                    <label class="alerta"><input type="checkbox" name="alerta" id="alerta" checked>Alerta sonora</label>
+                </div>
+                <div class="caja-demasbotones">
+                    <input class="continuar" type="button" value="Continuar">
+                    <input class="empezar" type="button" value="Empezar">
+                    <input class="pausa" type="button" value="Pausa">
+                    <input class="reiniciar" type="button" value="Reiniciar"> 
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+<script src="pomodoro.js"></script>
+</html>
+
+
