@@ -167,6 +167,8 @@ async function resetearLosTiempos() {
 	const confirmacion = await confirmarReset();
 	if (confirmacion) {
 		limpiarMarcadores();
+		descansos = 3;
+		pomodorosCompletados = 0;
 		tiempoActual = 0;
 		actualMasTiempo = 0;
 		intermedioTiempo = null;
