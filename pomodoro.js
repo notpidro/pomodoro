@@ -20,7 +20,7 @@ const btnModalNo = document.querySelector(".boton-modal-no");
 let textoDentroModal = document.querySelector(".texto-dentro-modal");
 
 //tiempos
-let tiempo = 1;
+let tiempo = 25;
 let tiempoDescansoCorto = tiempo / 5;
 let tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 
