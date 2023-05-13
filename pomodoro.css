@@ -13,6 +13,11 @@ header {
     justify-content: center;
 }
 
+h1 {
+	font-weight: 400;
+	font-size: 1.5em;
+}
+
 main {
     min-height: 84vh;
 	display: flex;
@@ -76,7 +81,7 @@ main {
 	border: solid 4px;
 	border-color: #00000020;
 	background-color: #2E294E;
-	border-radius: 9px;
+	border-radius: 29px;
 	min-width: 350px;
 	min-height: 350px;
 	display: flex;

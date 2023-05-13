@@ -13,6 +13,7 @@ let checkAlertaSonora = document.querySelector("#alerta-sonora");
 const labelAlertaSonora = document.querySelector(".alerta-sonora");
 
 const cajaMasMenos = document.querySelector(".caja-masmenos");
+let descripcion = document.querySelector(".mostrar-descripcion");
 const alertaUno = new Audio("audios/alerta01.mp3");
 const alertaDos = new Audio("audios/alerta02.mp3");
 let ventanaModal = document.querySelector(".ventana-modal");
@@ -52,6 +53,7 @@ let tiempoTranscurrido;
 let porcentajeActual;
 
 //Mostrar/Ocultar en el HTML
+descripcion.style.display = "none";
 mostrarTiempo.textContent = tiempo + " minutos";
 // mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
 // mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
@@ -162,7 +164,7 @@ function continuarTiempo() {
 
 async function resetearLosTiempos() {
 	pausarTiempo();
-	texto = "Estas seguro que deseas resetear los tiempos?";
+	texto = "Estas seguro que deseas reiniciar?";
 	mostrarModal(texto);
 	const confirmacion = await confirmarReset();
 	if (confirmacion) {
@@ -180,6 +182,7 @@ async function resetearLosTiempos() {
 		checkAlertaSonora.style.display = "";
 		labelAlertaSonora.style.display = "";
 		continuar.style.display = "none";
+		descripcion.style.display = "none";
 		empezar.style.display = "";
 		reiniciar.style.display = "none";
 	} else {
@@ -249,6 +252,8 @@ function correTiempo(momentoActual) {
 		minutos = "0" + minutos;
 	}
 	if (momentoActual === tiempo) {
+		descripcion.style.display = "";
+		descripcion.textContent = "-- Pomodoro --";
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
 			suenaAlerta(alertaDos);
 			mostrarTiempo.textContent = "--:--";
@@ -272,6 +277,8 @@ function correTiempo(momentoActual) {
 	}
 
 	if (momentoActual === tiempoDescansoCorto) {
+		descripcion.style.display = "";
+		descripcion.textContent = "-- Descanso corto --";
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
 			descansos -= 1;
 			pausarTiempo();
@@ -283,6 +290,8 @@ function correTiempo(momentoActual) {
 	}
 
 	if (momentoActual === tiempoDescansoLargo) {
+		descripcion.style.display = "";
+		descripcion.textContent = "-- Descanso largo --";
 		if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
 			suenaAlerta(alertaUno);
 			pausarTiempo();
