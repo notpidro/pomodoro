@@ -279,7 +279,7 @@ async function correTiempo(momentoActual) {
 	if (minutos < 10) {
 		minutos = "0" + minutos;
 	}
-	console.log(segundos)
+	// console.log(segundos)
 	if (momentoActual === tiempo) {
 		descripcion.style.display = "";
 		descripcion.textContent = "-- Pomodoro --";
@@ -288,17 +288,17 @@ async function correTiempo(momentoActual) {
 			continuarSesion();
 			confirmacionContinuar = await confirmarContinuar();
 			if (confirmacionContinuar) {
-				console.log("a");
+				// console.log("a");
 				ocultarModal();
 				tiemposEnCero();
 				alertaTres.volume = 0;
-				console.log("baja volumen desde pomo");
+				// console.log("baja volumen desde pomo");
 				mostrarTiempo.textContent = "--:--";
 				pomodorosCompletados += 1;
 				// console.log("Pomodoros completados = " + pomodorosCompletados);
 				// console.log("Cantidad de decansos: " + descansos);
 				confirmacionContinuar = null;
-				console.log("confirmacion a null");
+				// console.log("confirmacion a null");
 				descansoCorto();
 				return;
 			}
@@ -308,12 +308,12 @@ async function correTiempo(momentoActual) {
 			confirmacionContinuar = await confirmarContinuar();
 			if (confirmacionContinuar) {
 				alertaTres.volume = 0;
-				console.log("baja volumen desde pomo");
+				// console.log("baja volumen desde pomo");
 				pomodorosCompletados += 1;
 				// console.log("Pomodoros completados = " + pomodorosCompletados);
 				mostrarTiempo.textContent = "--:--";
 				confirmacionContinuar = null;
-				console.log("confirmacion a null");
+				// console.log("confirmacion a null");
 				ocultarModal();
 				tiemposEnCero();
 				descansoLargo();
@@ -333,11 +333,11 @@ async function correTiempo(momentoActual) {
 				ocultarModal();
 				tiemposEnCero();
 				alertaTres.volume = 0;
-				console.log("baja volumen desde corto");
+				// console.log("baja volumen desde corto");
 				descansos -= 1;
 				mostrarTiempo.textContent = "--:--";
 				confirmacionContinuar = null;
-				console.log("confirmacion a null");
+				// console.log("confirmacion a null");
 
 				empezarPomodoro();
 				return;
@@ -364,7 +364,7 @@ async function correTiempo(momentoActual) {
 				empezar.style.display = "";
 				// console.log("Cantidad de decansos: " + descansos);
 				confirmacionContinuar = null;
-				console.log("confirmacion a null");
+				// console.log("confirmacion a null");
 
 				tiemposEnCero();
 				ocultarModal();
