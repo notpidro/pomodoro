@@ -10,3 +10,5 @@ Una sesion completa va a estar compuesta de 4 sesiones de 25 minutos(pomodoros),
 Orden sesion completa pomodoro -> descanso corto -> pomodoro -> descanso corto -> pomodoro -> descanso corto -> pomodoro -> descanso largo.
 
 Da la opcion de reproducir o no una alerta sonora cuando termine el tiempo de la sesion y descanso largo.
+
+13/05/2023 sigo haciendo fixes
