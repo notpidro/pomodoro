@@ -64,7 +64,8 @@ main {
 }
 
 .boton-modal-si,
-.boton-modal-no {
+.boton-modal-no,
+.boton-modal-continuar {
 	margin-top: 20px;
 }
 

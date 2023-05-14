@@ -11,21 +11,22 @@ let mostrarDescansoCorto = document.querySelector(".tiempo-descanso-corto");
 let mostrarDescansoLargo = document.querySelector(".tiempo-descanso-largo");
 let checkAlertaSonora = document.querySelector("#alerta-sonora");
 const labelAlertaSonora = document.querySelector(".alerta-sonora");
-
 const cajaMasMenos = document.querySelector(".caja-masmenos");
 let descripcion = document.querySelector(".mostrar-descripcion");
 const alertaUno = new Audio("audios/alerta01.mp3");
 const alertaDos = new Audio("audios/alerta02.mp3");
+const alertaTres = new Audio("audios/alerta03.mp3");
 let ventanaModal = document.querySelector(".ventana-modal");
 const btnModalCerrar = document.querySelector(".boton-modal-cerrar");
+const btnModalContinuar = document.querySelector(".boton-modal-continuar");
 const btnModalSi = document.querySelector(".boton-modal-si");
 const btnModalNo = document.querySelector(".boton-modal-no");
 let textoDentroModal = document.querySelector(".texto-dentro-modal");
 
 //tiempos
 let tiempo = 25;
-let tiempoDescansoCorto = tiempo / 5;
-let tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
+let tiempoDescansoCorto = 5;
+let tiempoDescansoLargo = 30;
 
 //info totales
 let descansos = 3;
@@ -55,6 +56,7 @@ let porcentajeActual;
 //Mostrar/Ocultar en el HTML
 descripcion.style.display = "none";
 mostrarTiempo.textContent = tiempo + " minutos";
+btnModalContinuar.style.display = "none";
 // mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
 // mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
 continuar.style.display = "none";
@@ -108,7 +110,7 @@ function limpiarMarcadores() {
 function llenarMarcadores(tiempo) {
 	tiempoTotal = tiempo * 60000;
 	tiempoTranscurrido = tiempoTotal - diferenciaTiempo;
-	porcentajeActual = Math.floor((tiempoTranscurrido / tiempoTotal) * 100 + 2);
+	porcentajeActual = Math.floor((tiempoTranscurrido / tiempoTotal) * 100 + 1);
 
 	marcadorLleno = document.querySelector(`#marcador-lleno-${porcentajeActual}`);
 
@@ -122,28 +124,24 @@ function sumarTiempo() {
 		return;
 	}
 	tiempo += 5;
-	tiempoDescansoCorto = tiempo / 5;
-	tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 	empezar.value = "Empezar";
 	mostrarTiempo.textContent = tiempo + " minutos";
 	// mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
 	// mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
-	tiempoActual = new Date().getTime();
+	// tiempoActual = new Date().getTime();
 	return tiempo;
 }
 
 function restarTiempo() {
-	if (tiempo === 5) {
+	if (tiempo === 10) {
 		return;
 	}
 	tiempo -= 5;
-	tiempoDescansoCorto = tiempo / 5;
-	tiempoDescansoLargo = tiempoDescansoCorto + tiempo;
 	empezar.value = "Empezar";
 	mostrarTiempo.textContent = tiempo + " minutos";
 	// mostrarDescansoCorto.textContent = "Descanso corto: " + tiempoDescansoCorto + " minutos";
 	// mostrarDescansoLargo.textContent = "Descanso largo: " + tiempoDescansoLargo + " minutos";
-	tiempoActual = new Date().getTime();
+	// tiempoActual = new Date().getTime();
 	return tiempo;
 }
 
@@ -162,8 +160,38 @@ function continuarTiempo() {
 	pausa.style.display = "";
 }
 
+let confirmacionContinuar;
+
+async function continuarSesion() {
+	alertaTres.volume = 0.1;
+	suenaAlerta(alertaTres);
+	btnModalNo.style.display = "none";
+	btnModalSi.style.display = "none";
+	mostrarModal(texto);
+	pausarTiempo();
+	confirmacionContinuar = await confirmarContinuar();
+	if (confirmacionContinuar) {
+		
+		btnModalContinuar.style.display = "none";
+	}
+}
+
+function confirmarContinuar() {
+	mostrarModal(texto);
+	btnModalContinuar.style.display = "";
+	return new Promise(function (resolve) {
+		btnModalContinuar.addEventListener("click", function () {
+			ocultarModal();
+			resolve(true);
+		});
+	});
+}
+
 async function resetearLosTiempos() {
 	pausarTiempo();
+	btnModalNo.style.display = "";
+	btnModalSi.style.display = "";
+	btnModalContinuar.style.display = "none";
 	texto = "Estas seguro que deseas reiniciar?";
 	mostrarModal(texto);
 	const confirmacion = await confirmarReset();
@@ -235,7 +263,7 @@ function ocultarTextosBotones() {
 	labelAlertaSonora.style.display = "none";
 }
 
-function correTiempo(momentoActual) {
+async function correTiempo(momentoActual) {
 	tiempoActual = new Date().getTime();
 	diferenciaTiempo = actualMasTiempo - tiempoActual;
 
@@ -251,28 +279,46 @@ function correTiempo(momentoActual) {
 	if (minutos < 10) {
 		minutos = "0" + minutos;
 	}
+	console.log(segundos)
 	if (momentoActual === tiempo) {
 		descripcion.style.display = "";
 		descripcion.textContent = "-- Pomodoro --";
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
-			suenaAlerta(alertaDos);
-			mostrarTiempo.textContent = "--:--";
-			pomodorosCompletados += 1;
-			pausarTiempo();
-			tiemposEnCero();
-			descansoCorto();
-			// console.log("Pomodoros completados = " + pomodorosCompletados);
-			// console.log("Cantidad de decansos: " + descansos);
-			return;
+			texto = "Termino el Pomodoro. Sigue descanso corto (" + tiempoDescansoCorto + "min)";
+			continuarSesion();
+			confirmacionContinuar = await confirmarContinuar();
+			if (confirmacionContinuar) {
+				console.log("a");
+				ocultarModal();
+				tiemposEnCero();
+				alertaTres.volume = 0;
+				console.log("baja volumen desde pomo");
+				mostrarTiempo.textContent = "--:--";
+				pomodorosCompletados += 1;
+				// console.log("Pomodoros completados = " + pomodorosCompletados);
+				// console.log("Cantidad de decansos: " + descansos);
+				confirmacionContinuar = null;
+				console.log("confirmacion a null");
+				descansoCorto();
+				return;
+			}
 		} else if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
-			suenaAlerta(alertaDos);
-			pomodorosCompletados += 1;
-			// console.log("Pomodoros completados = " + pomodorosCompletados);
-			pausarTiempo();
-			tiemposEnCero();
-			mostrarTiempo.textContent = "--:--";
-			descansoLargo();
-			return;
+			texto = "Termino el Pomodoro. Sigue descanso largo (" + tiempoDescansoLargo + "min)";
+			continuarSesion();
+			confirmacionContinuar = await confirmarContinuar();
+			if (confirmacionContinuar) {
+				alertaTres.volume = 0;
+				console.log("baja volumen desde pomo");
+				pomodorosCompletados += 1;
+				// console.log("Pomodoros completados = " + pomodorosCompletados);
+				mostrarTiempo.textContent = "--:--";
+				confirmacionContinuar = null;
+				console.log("confirmacion a null");
+				ocultarModal();
+				tiemposEnCero();
+				descansoLargo();
+				return;
+			}
 		}
 	}
 
@@ -280,12 +326,22 @@ function correTiempo(momentoActual) {
 		descripcion.style.display = "";
 		descripcion.textContent = "-- Descanso corto --";
 		if ((segundos === "00") & (minutos === "00") & (descansos != 0)) {
-			descansos -= 1;
-			pausarTiempo();
-			tiemposEnCero();
-			mostrarTiempo.textContent = "--:--";
-			empezarPomodoro();
-			return;
+			texto = "Termino el descanso corto. Sigue Pomodoro (" + tiempo + "min)";
+			continuarSesion();
+			confirmacionContinuar = await confirmarContinuar();
+			if (confirmacionContinuar) {
+				ocultarModal();
+				tiemposEnCero();
+				alertaTres.volume = 0;
+				console.log("baja volumen desde corto");
+				descansos -= 1;
+				mostrarTiempo.textContent = "--:--";
+				confirmacionContinuar = null;
+				console.log("confirmacion a null");
+
+				empezarPomodoro();
+				return;
+			}
 		}
 	}
 
@@ -293,19 +349,27 @@ function correTiempo(momentoActual) {
 		descripcion.style.display = "";
 		descripcion.textContent = "-- Descanso largo --";
 		if ((segundos === "00") & (minutos === "00") & (descansos === 0)) {
-			suenaAlerta(alertaUno);
-			pausarTiempo();
-			tiemposEnCero();
-			descansos = 3;
-			ciclosCompletados += 1;
-			// console.log("Pomodoros completados = " + pomodorosCompletados);
-			// console.log("Ciclos completados: " + ciclosCompletados);
-			mostrarTiempo.textContent = "COMPLETADO";
-			reiniciar.style.display = "none";
-			continuar.style.display = "none";
-			empezar.style.display = "";
-			// console.log("Cantidad de decansos: " + descansos);
-			return;
+			texto = "Termino el descanso largo";
+			continuarSesion();
+			confirmacionContinuar = await confirmarContinuar();
+			if (confirmacionContinuar) {
+				alertaTres.volume = 0;
+				descansos = 3;
+				ciclosCompletados += 1;
+				// console.log("Pomodoros completados = " + pomodorosCompletados);
+				// console.log("Ciclos completados: " + ciclosCompletados);
+				mostrarTiempo.textContent = "COMPLETADO";
+				reiniciar.style.display = "none";
+				continuar.style.display = "none";
+				empezar.style.display = "";
+				// console.log("Cantidad de decansos: " + descansos);
+				confirmacionContinuar = null;
+				console.log("confirmacion a null");
+
+				tiemposEnCero();
+				ocultarModal();
+				return;
+			}
 		}
 	}
 
