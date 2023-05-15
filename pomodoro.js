@@ -9,13 +9,14 @@ const reiniciar = document.querySelector(".reiniciar");
 const circuloIndicador = document.querySelector(".circulo-indicador");
 let mostrarDescansoCorto = document.querySelector(".tiempo-descanso-corto");
 let mostrarDescansoLargo = document.querySelector(".tiempo-descanso-largo");
+const cajaMasMenos = document.querySelector(".caja-masmenos");
 let checkAlertaSonora = document.querySelector("#alerta-sonora");
 const labelAlertaSonora = document.querySelector(".alerta-sonora");
-const cajaMasMenos = document.querySelector(".caja-masmenos");
-let descripcion = document.querySelector(".mostrar-descripcion");
+let volumenAlerta = document.querySelector("#volumen-alerta-sonora");
 const alertaUno = new Audio("audios/alerta01.mp3");
 const alertaDos = new Audio("audios/alerta02.mp3");
 const alertaTres = new Audio("audios/alerta03.mp3");
+let descripcion = document.querySelector(".mostrar-descripcion");
 let ventanaModal = document.querySelector(".ventana-modal");
 const btnModalCerrar = document.querySelector(".boton-modal-cerrar");
 const btnModalContinuar = document.querySelector(".boton-modal-continuar");
@@ -32,6 +33,10 @@ let tiempoDescansoLargo = 30;
 let descansos = 3;
 let pomodorosCompletados = 0;
 let ciclosCompletados = 0;
+
+//volumen sonidos
+let volumen = 0.5;
+alertaTres.volume = volumen;
 
 //calculos de tiempos
 let momentoActual = tiempo;
@@ -53,6 +58,8 @@ let tiempoTotal;
 let tiempoTranscurrido;
 let porcentajeActual;
 
+let confirmacionContinuar;
+
 //Mostrar/Ocultar en el HTML
 descripcion.style.display = "none";
 mostrarTiempo.textContent = tiempo + " minutos";
@@ -68,12 +75,23 @@ ventanaModal.style.display = "none";
 crearMarcadores();
 circuloIndicador.style.display = "none";
 
-//funciones
+//funciones}
+
+function sobrePomodoro() {}
 
 function suenaAlerta(audio) {
 	if (checkAlertaSonora.checked) {
 		audio.play();
 	}
+}
+
+function volumenAlertaSon() {
+	const maxSlider = 100;
+	const maxVolume = 1;
+	volumen = volumenAlerta.value;
+	volumen = (maxVolume * volumen) / maxSlider;
+	suenaAlerta(alertaTres);
+	return (alertaTres.volume = volumen);
 }
 
 function mostrarModal(texto) {
@@ -160,10 +178,7 @@ function continuarTiempo() {
 	pausa.style.display = "";
 }
 
-let confirmacionContinuar;
-
 async function continuarSesion() {
-	alertaTres.volume = 0.1;
 	suenaAlerta(alertaTres);
 	btnModalNo.style.display = "none";
 	btnModalSi.style.display = "none";
@@ -171,7 +186,6 @@ async function continuarSesion() {
 	pausarTiempo();
 	confirmacionContinuar = await confirmarContinuar();
 	if (confirmacionContinuar) {
-		
 		btnModalContinuar.style.display = "none";
 	}
 }
@@ -428,3 +442,4 @@ continuar.addEventListener("click", continuarTiempo);
 empezar.addEventListener("click", empezarPomodoro);
 pausa.addEventListener("click", pausarTiempo);
 reiniciar.addEventListener("click", resetearLosTiempos);
+volumenAlerta.addEventListener("input", volumenAlertaSon);
