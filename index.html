@@ -1,64 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="pomodoro.css">
-    <title>Pomodoro - by Walter F. Campillay P.</title>
-</head>
-<body>
-    <header>
-        <h1>Pomodoro simple</h1>
-    </header>
-    <main>
-        <div class="ventana-modal">
-            <div class="contenido-modal">
-                <span class="boton-modal-cerrar">&times;</span>
-                <p class="texto-dentro-modal">Texto en la ventana modal</p>
-                <button class="boton-modal-continuar">Continuar</button>
-                <button class="boton-modal-si">Si</button>
-                <button class="boton-modal-no">No</button>
-            </div>
-        </div>
-        <section class="pomodoro">
-            <div class="ingreso-tiempo">
-                <div class="circulo-indicador"></div>
-                <div class="caja-tiempo-masmenos">
-                    <p class="mostrar-tiempo"></p>
-                    <p class="mostrar-descripcion"></p>
-                    <div class="caja-masmenos">
-                        <input class="mas" type="button" value="+">
-                        <input class="menos" type="button" value="-">
-                    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" />
+		<script src="https://kit.fontawesome.com/ce5b9ad9fa.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="reset.css" />
+		<link rel="stylesheet" href="pomodoro.css" />
+		<title>Pomodoro - by Walter F. Campillay P.</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<h1>Pomodoro simple</h1>
+				<div class="contenedor-switch">
+                    <label class="switch">
+                        <input type="checkbox" id="slider-tema" checked />
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="configuracion-descansos">
-                    <!-- <p class="tiempo-descanso-corto">Descanso corto</p>
+			</nav>
+		</header>
+		<main>
+			<div class="ventana-modal">
+				<div class="contenido-modal">
+					<span class="boton-modal-cerrar">&times;</span>
+					<p class="texto-dentro-modal">Texto en la ventana modal</p>
+					<button class="boton-modal-continuar">Continuar</button>
+					<button class="boton-modal-si">Si</button>
+					<button class="boton-modal-no">No</button>
+				</div>
+			</div>
+			<section class="pomodoro">
+				<div class="ingreso-tiempo">
+					<div class="circulo-indicador"></div>
+					<div class="caja-tiempo-masmenos">
+						<p class="mostrar-tiempo"></p>
+						<p class="mostrar-descripcion"></p>
+						<div class="caja-masmenos">
+							<input class="mas" type="button" value="+" />
+							<input class="menos" type="button" value="-" />
+						</div>
+					</div>
+					<div class="configuracion-descansos">
+						<!-- <p class="tiempo-descanso-corto">Descanso corto</p>
                     <p class="tiempo-descanso-largo">Descanso largo</p> -->
-                    <label class="alerta-sonora"><input type="checkbox" name="alerta-sonora" id="alerta-sonora" checked>Alerta sonora</label>
-                    <input type="range" min="1" max="100" name="volumen-alerta-sonora" id="volumen-alerta-sonora">
-                </div>
-                <div class="caja-demasbotones">
-                    <input class="continuar" type="button" value="Continuar">
-                    <input class="empezar" type="button" value="Empezar">
-                    <input class="pausa" type="button" value="Pausa">
-                    <input class="reiniciar" type="button" value="Reiniciar"> 
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy Copyright Walter F. Campillay P.</p>
-        <div class="caja-links">
-            <a href="https://www.linkedin.com/in/walter-campillay/" target="_blank"><img src="imagenes-footer/linkedin-in.svg" alt="Perfil LinkedIn Walter"></a>
-            <a href="https://github.com/notpidro" target="_blank"><img src="imagenes-footer/github.svg" alt="Perfil GitHub Walter"></a>
-            <a href="https://app.aluracursos.com/user/walter-campillay" target="_blank"><img src="imagenes-footer/a-alura.svg" alt="Perfil alura Walter"></a>
-        </div>
-    </footer>
-</body>
-<script src="pomodoro.js"></script>
+						<label class="alerta-sonora"><input type="checkbox" name="alerta-sonora" id="alerta-sonora" checked />Alerta sonora</label>
+						<input type="range" min="1" max="100" name="volumen-alerta-sonora" id="volumen-alerta-sonora" />
+					</div>
+					<div class="caja-demasbotones">
+						<input class="continuar" type="button" value="Continuar" />
+						<input class="empezar" type="button" value="Empezar" />
+						<input class="pausa" type="button" value="Pausa" />
+						<input class="reiniciar" type="button" value="Reiniciar" />
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<p>&copy Copyright Walter F. Campillay P.</p>
+			<div class="caja-links">
+				<a href="https://www.linkedin.com/in/walter-campillay/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+				<a href="https://github.com/notpidro" target="_blank"><i class="fab fa-github"></i></a>
+				<a href="https://discord.com/users/303415805222322176" target="_blank"><i class="fab fa-discord"></i></a>
+			</div>
+		</footer>
+	</body>
+	<script src="pomodoro.js"></script>
 </html>

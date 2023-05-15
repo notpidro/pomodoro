@@ -1,7 +1,23 @@
+[data-theme="light"] {
+	--fondo-svg: url(./imagenes/moon-solid.svg);
+    --fondo: #EADEDA;
+	--fondoPomo: #2E294E;
+    --texto: #2E294E;
+	--textoPomo: #EADEDA;
+}
+
+[data-theme="dark"] {
+	--fondo-svg: url(./imagenes/sun-solid.svg);
+    --fondo: #2E294E;
+	--fondoPomo: #7872a0;
+    --texto: #EADEDA;
+	--textoPomo: #2E294E;
+}
+
 body {
 	font-family: "Ubuntu", sans-serif;
-	background-color: #EADEDA;
-	color: #2E294E;
+	background-color: var(--fondo);
+	color: var(--texto);
 	height: 100%;
 }
 
@@ -11,6 +27,19 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+nav {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.contenedor-switch {
+	position: absolute;
+	right: 15px;
+	top: 10px;
 }
 
 h1 {
@@ -74,14 +103,14 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #EADEDA;
+	color: var(--textoPomo);
 }
 
 .ingreso-tiempo {
 	padding-top: 5px;
 	border: solid 4px;
 	border-color: #00000020;
-	background-color: #2E294E;
+	background-color: var(--fondoPomo);
 	border-radius: 29px;
 	min-width: 350px;
 	min-height: 350px;
@@ -208,11 +237,61 @@ footer a:hover {
     justify-content: space-between;
 }
 
-footer img:hover {
-    filter: brightness(8);
+.fab:hover {
+    filter: brightness(3);
 }
 
-.caja-links img {
-    width: 25px;
-    height: 25px;
+.fab {
+	color: var(--texto);
+	font-size: 1.5em;
+}
+
+/* Configuracion switch color tema */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+}
+
+#slider-tema {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--texto);
+    transition: 0.4s;
+    border-radius: 35px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    /* background-color: var(--primario); */
+	background-image: var(--fondo-svg);
+	background-size: cover;
+	background-position: center center;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--texto);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
