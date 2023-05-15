@@ -88,7 +88,50 @@ main {
 	color: #2E294E;
 	padding: 30px 20px 20px;
 	border: 1px solid #888;
-	width: 300px;
+	width: 500px;
+}
+
+.info-pomodoro {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.info-encabezado {
+	width: 100%;
+	text-align: center;
+	font-weight: 800;
+	margin-bottom: 20px;
+}
+
+.info-izquierda {
+	display: flex;
+	justify-content: center;
+	padding-top: 15px;
+	width: 15%;
+}
+
+.imagen-pomodoro {
+	width: 130px;
+	height: 130px;
+}
+
+.info-derecha {
+	width: 65%;
+}
+
+.info-derecha ul {
+	padding-top: 15px;
+	padding-left: 35px;
+}
+
+.info-derecha li {
+	margin-bottom: 8px;
+	list-style: inside;
+	/* padding: 15px;
+	border-radius: 50px;
+	background-color: var(--fondoPomo); */
 }
 
 .boton-modal-cerrar {
@@ -294,7 +337,6 @@ footer a:hover {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    /* background-color: var(--primario); */
 	background-image: var(--fondo-svg);
 	background-size: cover;
 	background-position: center center;
@@ -312,4 +354,10 @@ input:checked + .slider:before {
 
 
 
-/* 730 */
+@media screen and (max-width: 785px) {
+	.contenedor-switch {
+		top: 50px;
+		width: 100%;
+		justify-content: space-evenly;
+	}
+}

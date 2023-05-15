@@ -3,6 +3,8 @@ const preferedColorScheme = window.matchMedia("(prefers-color-scheme: dark)").ma
 
 //vinculo con elementos de HTML
 const slider = document.querySelector("#slider-tema");
+const sobrePomodoro = document.querySelector(".que-es-pomodoro");
+const infoPomodoro = document.querySelector(".info-pomodoro")
 let mostrarTiempo = document.querySelector(".mostrar-tiempo");
 const btnSumarTiempo = document.querySelector(".mas");
 const btnRestarTiempo = document.querySelector(".menos");
@@ -74,6 +76,7 @@ continuar.style.display = "none";
 pausa.style.display = "none";
 reiniciar.style.display = "none";
 ventanaModal.style.display = "none";
+infoPomodoro.style.display = "none";
 
 //Crea y oculta los marcadores
 crearMarcadores();
@@ -95,7 +98,23 @@ setTheme(localStorage.getItem("theme") || preferedColorScheme);
 //
 
 
-function sobrePomodoro() {}
+function mostrarInfo() {
+	mostrarModal();
+	btnModalNo.style.display = "none";
+	btnModalSi.style.display = "none";
+	btnModalContinuar.style.display = "";
+	infoPomodoro.style.display = "";
+	btnModalContinuar.addEventListener("click", function () {
+		ocultarModal();
+		infoPomodoro.style.display = "none";
+	});
+	window.onclick = function (event) {
+		if (event.target === ventanaModal) {
+			ocultarModal();
+			infoPomodoro.style.display = "none";
+		}
+	};
+}
 
 
 
@@ -463,3 +482,4 @@ empezar.addEventListener("click", empezarPomodoro);
 pausa.addEventListener("click", pausarTiempo);
 reiniciar.addEventListener("click", resetearLosTiempos);
 volumenAlerta.addEventListener("input", volumenAlertaSon);
+sobrePomodoro.addEventListener("click", mostrarInfo);
