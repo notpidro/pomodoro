@@ -37,14 +37,28 @@ nav {
 }
 
 .contenedor-switch {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	position: absolute;
 	right: 15px;
 	top: 10px;
+	width: 250px;
+}
+
+.que-es-pomodoro {
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 1em;
+	color: var(--texto);
+	background-color: var(--fondo);
+	border: none;
+
 }
 
 h1 {
-	font-weight: 400;
-	font-size: 1.5em;
+	font-weight: 900;
+	font-size: 1.9em;
 }
 
 main {
@@ -295,3 +309,7 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
+
+
+
+/* 730 */
