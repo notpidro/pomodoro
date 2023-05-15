@@ -269,6 +269,10 @@ main {
 	background-color: #7f71da;
 }
 
+.mostrar-descripcion {
+	font-weight: 900;
+}
+
 footer {
     width: 100%;
     min-height: 10vh;

@@ -167,7 +167,7 @@ function limpiarMarcadores() {
 function llenarMarcadores(tiempo) {
 	tiempoTotal = tiempo * 60000;
 	tiempoTranscurrido = tiempoTotal - diferenciaTiempo;
-	porcentajeActual = Math.floor((tiempoTranscurrido / tiempoTotal) * 100 + 1);
+	porcentajeActual = Math.floor((tiempoTranscurrido / tiempoTotal) * 100 + 2);
 
 	marcadorLleno = document.querySelector(`#marcador-lleno-${porcentajeActual}`);
 
@@ -221,6 +221,7 @@ async function continuarSesion() {
 	suenaAlerta(alertaTres);
 	btnModalNo.style.display = "none";
 	btnModalSi.style.display = "none";
+	mostrarTiempo.textContent = "00:00";
 	mostrarModal(texto);
 	pausarTiempo();
 	confirmacionContinuar = await confirmarContinuar();
@@ -255,6 +256,7 @@ async function resetearLosTiempos() {
 		tiempoActual = 0;
 		actualMasTiempo = 0;
 		intermedioTiempo = null;
+		volumenAlerta.style.display = "";
 		mostrarTiempo.textContent = tiempo + " minutos";
 		circuloIndicador.style.display = "none";
 		mostrarTiempo.style.transform = "translate(0%, 0%)";
@@ -344,7 +346,6 @@ async function correTiempo(momentoActual) {
 				// console.log("a");
 				ocultarModal();
 				tiemposEnCero();
-				alertaTres.volume = 0;
 				// console.log("baja volumen desde pomo");
 				mostrarTiempo.textContent = "--:--";
 				pomodorosCompletados += 1;
@@ -360,7 +361,6 @@ async function correTiempo(momentoActual) {
 			continuarSesion();
 			confirmacionContinuar = await confirmarContinuar();
 			if (confirmacionContinuar) {
-				alertaTres.volume = 0;
 				// console.log("baja volumen desde pomo");
 				pomodorosCompletados += 1;
 				// console.log("Pomodoros completados = " + pomodorosCompletados);
@@ -385,7 +385,6 @@ async function correTiempo(momentoActual) {
 			if (confirmacionContinuar) {
 				ocultarModal();
 				tiemposEnCero();
-				alertaTres.volume = 0;
 				// console.log("baja volumen desde corto");
 				descansos -= 1;
 				mostrarTiempo.textContent = "--:--";
@@ -406,7 +405,6 @@ async function correTiempo(momentoActual) {
 			continuarSesion();
 			confirmacionContinuar = await confirmarContinuar();
 			if (confirmacionContinuar) {
-				alertaTres.volume = 0;
 				descansos = 3;
 				ciclosCompletados += 1;
 				// console.log("Pomodoros completados = " + pomodorosCompletados);
@@ -430,6 +428,7 @@ async function correTiempo(momentoActual) {
 }
 
 function empezarPomodoro() {
+	volumenAlerta.style.display = "none";
 	momentoActual = tiempo;
 	circuloIndicador.style.display = "";
 	limpiarMarcadores();
