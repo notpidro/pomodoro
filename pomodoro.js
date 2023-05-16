@@ -114,6 +114,10 @@ function mostrarInfo() {
 			infoPomodoro.style.display = "none";
 		}
 	};
+	btnModalCerrar.addEventListener("click", function () {
+		ocultarModal();
+		resolve(false);
+	});
 }
 
 
